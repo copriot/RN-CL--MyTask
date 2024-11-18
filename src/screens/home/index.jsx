@@ -7,11 +7,11 @@ import {Dimensions} from 'react-native';
 const {width, height} = Dimensions.get('screen');
 const Home = ({navigation}) => {
   return (
-    <View style={styles.container}>
+    <SafeAreaView style={styles.container}>
       <Text>Home</Text>
 
       <FloatAction onPress={() => navigation.navigate(screens.ADDTASKS)} />
-    </View>
+    </SafeAreaView>
   );
 };
 
@@ -19,6 +19,7 @@ export default Home;
 
 const styles = StyleSheet.create({
   container: {
+    backgroundColor: '#555555',
     flex: 1,
   },
 });
