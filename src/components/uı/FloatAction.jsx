@@ -1,13 +1,13 @@
 import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import React from 'react';
-import {Add} from 'iconsax-react-native';
+import {PenAdd} from 'iconsax-react-native';
 import {Dimensions} from 'react-native';
 
 const {width, height} = Dimensions.get('screen');
-const FloatAction = () => {
+const FloatAction = props => {
   return (
-    <TouchableOpacity style={styles.container}>
-      <Add size="32" color="#fff" />
+    <TouchableOpacity {...props} style={styles.container}>
+      <PenAdd size="36" color="#dce775" variant="Broken" />
     </TouchableOpacity>
   );
 };
@@ -20,10 +20,12 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     width: height * 0.1,
     height: height * 0.1,
-    borderRadius: 100,
+    borderRadius: 32,
     position: 'absolute',
-    backgroundColor: '#2CCCE4',
+    backgroundColor: '#555555',
     bottom: 20,
     right: 20,
+    borderWidth: 2,
+    borderColor: '#697689',
   },
 });

@@ -1,12 +1,16 @@
 import {SafeAreaView, StyleSheet, Text, View} from 'react-native';
 import React from 'react';
 import FloatAction from '../../components/uı/FloatAction';
+import {screens} from '../../utils/routesNames';
+import {Dimensions} from 'react-native';
 
-const Home = () => {
+const {width, height} = Dimensions.get('screen');
+const Home = ({navigation}) => {
   return (
     <View style={styles.container}>
       <Text>Home</Text>
-      <FloatAction />
+
+      <FloatAction onPress={() => navigation.navigate(screens.ADDTASKS)} />
     </View>
   );
 };
