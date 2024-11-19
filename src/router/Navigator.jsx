@@ -5,6 +5,7 @@ import Home from '../screens/home';
 import {screens} from '../utils/routesNames';
 import AddTask from '../screens/addTask';
 import TaskDetail from '../screens/taskDetail';
+import themeColors from '../theme';
 const Stack = createNativeStackNavigator();
 
 const Navigator = () => {
@@ -12,16 +13,16 @@ const Navigator = () => {
     <NavigationContainer>
       <Stack.Navigator
         screenOptions={{
-          headerTintColor: '#fff',
-          headerTitleStyle: {color: '#fff'},
+          headerTintColor: themeColors.textColor,
+          headerTitleStyle: {color: themeColors.textColor},
           //  headerTintColor: {color: '#fff'},
           // Header kısmını
           headerStyle: {
-            backgroundColor: '#555555', // Header'ın arka plan rengi
+            backgroundColor: themeColors.background, // Header'ın arka plan rengi
           },
           // Ekranların içerik kısmının arka plan rengi
           contentStyle: {
-            backgroundColor: '#555555', // Ekranın iç kısmı için arka plan rengi
+            backgroundColor: themeColors.background, // Ekranın iç kısmı için arka plan rengi
           },
         }}>
         <Stack.Screen name={screens.TASKS} component={Home} />

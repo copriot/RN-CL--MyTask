@@ -1,4 +1,4 @@
-import {StyleSheet, Text, View} from 'react-native';
+import {StyleSheet} from 'react-native';
 import React from 'react';
 import {Datepicker} from '@ui-kitten/components';
 const CustomDatePicker = props => {

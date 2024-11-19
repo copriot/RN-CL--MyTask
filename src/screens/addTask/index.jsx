@@ -1,9 +1,10 @@
 /* eslint-disable react/react-in-jsx-scope */
 import {Formik} from 'formik';
 import {StyleSheet, View} from 'react-native';
-import {Input, Button} from '@ui-kitten/components';
+import {Input, Button, RadioGroup, Radio, Text} from '@ui-kitten/components';
 import CustomDatePicker from '../../components/uı/CustomDatePicker';
 import {Alert} from 'react-native';
+import themeColors from '../../theme';
 const AddTask = () => {
   return (
     <View style={styles.container}>
@@ -13,6 +14,7 @@ const AddTask = () => {
           description: '',
           startDate: null,
           endDate: null,
+          category: null,
         }}
         onSubmit={values => Alert.alert(JSON.stringify(values, null, 2))}>
         {({handleChange, handleSubmit, values, setFieldValue, errors}) => (
@@ -48,8 +50,15 @@ const AddTask = () => {
               label={'End Date'}
               onSelectDate={date => setFieldValue('endDate', date)}
             />
+            <RadioGroup
+              selectedIndex={values.category}
+              onChange={index => setFieldValue('category', index)}>
+              <Radio status="warning">Software</Radio>
+              <Radio status="warning">Design</Radio>
+              <Radio status="warning">Operation</Radio>
+            </RadioGroup>
             <Button
-              status="success"
+              status="warning"
               style={{marginTop: 30}}
               onPress={handleSubmit}>
               CREATE
@@ -65,4 +74,5 @@ export default AddTask;
 
 const styles = StyleSheet.create({
   container: {flex: 1, paddingHorizontal: 10},
+  radioStyle: {textColor: themeColors.textColor},
 });
