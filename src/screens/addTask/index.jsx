@@ -1,12 +1,27 @@
 /* eslint-disable react/react-in-jsx-scope */
 import {Formik} from 'formik';
-import {StyleSheet, Text, View} from 'react-native';
+import {ScrollView, StyleSheet, View} from 'react-native';
 import {Input, Button, RadioGroup, Radio} from '@ui-kitten/components';
 import CustomDatePicker from '../../components/uı/CustomDatePicker';
-import {Alert} from 'react-native';
+import {Dimensions} from 'react-native';
 import themeColors from '../../theme';
 import taskSchema from '../../utils/validation';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import {useNavigation} from '@react-navigation/native';
+import {screens} from '../../utils/routesNames';
+
 const AddTask = () => {
+  const navigation = useNavigation();
+  const {width, height} = Dimensions.get('screen');
+
+  const saveTask = async values => {
+    try {
+      await AsyncStorage.setItem('task', JSON.stringify(values));
+    } catch (error) {
+      console.error('Task kaydedilirken hata oluştu:', error);
+    }
+  };
+
   return (
     <View style={styles.container}>
       <Formik
@@ -18,7 +33,10 @@ const AddTask = () => {
           category: null,
         }}
         validationSchema={taskSchema}
-        onSubmit={values => Alert.alert(JSON.stringify(values, null, 2))}>
+        onSubmit={async values => {
+          await saveTask(values);
+          navigation.navigate(screens.TASKS);
+        }}>
         {({handleChange, handleSubmit, values, setFieldValue, errors}) => (
           <View>
             <Input
@@ -63,25 +81,34 @@ const AddTask = () => {
               status={errors.endDate ? 'danger' : 'basic'}
               caption={errors.endDate}
             />
-
-            <RadioGroup
+            <ScrollView
               style={{
-                backgroundColor: themeColors.textColor,
+                height: height * 0.15,
+                marginVertical: 15,
                 borderRadius: 10,
-                paddingHorizontal: 10,
-              }}
-              selectedIndex={values.category}
-              onChange={index => setFieldValue('category', index)}>
-              <Radio status="warning" style={styles.radioStyle}>
-                Software
-              </Radio>
-              <Radio status="warning" style={styles.radioStyle}>
-                Design
-              </Radio>
-              <Radio status="warning" style={styles.radioStyle}>
-                Operation
-              </Radio>
-            </RadioGroup>
+              }}>
+              <RadioGroup
+                style={{
+                  backgroundColor: themeColors.textColor,
+                  borderRadius: 10,
+                  paddingHorizontal: 20,
+                }}
+                selectedIndex={values.category}
+                onChange={index => setFieldValue('category', index)}>
+                <Radio status="warning" style={styles.radioStyle}>
+                  Software
+                </Radio>
+                <Radio status="warning" style={styles.radioStyle}>
+                  Design
+                </Radio>
+                <Radio status="warning" style={styles.radioStyle}>
+                  Operation
+                </Radio>
+                <Radio status="warning" style={styles.radioStyle}>
+                  Home Work
+                </Radio>
+              </RadioGroup>
+            </ScrollView>
             <Button
               status="warning"
               style={{marginTop: 30}}
@@ -104,5 +131,6 @@ const styles = StyleSheet.create({
     borderStyle: 'solid',
     borderBottomWidth: 2,
     paddingBottom: 5,
+    marginVertical: 13,
   },
 });
