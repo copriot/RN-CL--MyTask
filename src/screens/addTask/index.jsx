@@ -9,6 +9,7 @@ import taskSchema from '../../utils/validation';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {useNavigation} from '@react-navigation/native';
 import {screens} from '../../utils/routesNames';
+import status from '../../utils/constant';
 
 const AddTask = () => {
   const navigation = useNavigation();
@@ -31,6 +32,7 @@ const AddTask = () => {
           startDate: null,
           endDate: null,
           category: null,
+          status: status.ONGOING,
         }}
         validationSchema={taskSchema}
         onSubmit={async values => {

@@ -5,12 +5,18 @@ const TaskCard = ({item}) => {
   console.log({item});
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>{item.title}</Text>
-      <Text style={styles.description}>{item.description}</Text>
+      <Text style={styles.title}>{item?.title || 'There isnt title'}</Text>
+      <Text style={styles.description}>
+        {item?.description || ' There is no description'}
+      </Text>
 
       <View style={{flexDirection: 'row'}}>
-        <Text style={styles.description}>{item.startDate}</Text>
-        <Text style={styles.description}>{item.endDate}</Text>
+        <Text style={styles.description}>
+          {item?.startDate || 'Start Date is not written'}
+        </Text>
+        <Text style={styles.description}>
+          {item?.endDate || 'End Date is not written'}
+        </Text>
       </View>
     </View>
   );

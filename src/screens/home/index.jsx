@@ -1,4 +1,10 @@
-import {FlatList, RefreshControl, SafeAreaView, StyleSheet} from 'react-native';
+import {
+  FlatList,
+  RefreshControl,
+  SafeAreaView,
+  StyleSheet,
+  View,
+} from 'react-native';
 import React, {useEffect, useState} from 'react';
 import FloatAction from '../../components/uı/FloatAction';
 import {screens} from '../../utils/routesNames';
@@ -6,11 +12,10 @@ import {screens} from '../../utils/routesNames';
 import themeColors from '../../theme';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import TaskCard from '../../components/home/TaskCard';
+import {Text} from 'react-native-svg';
+import Header from '../../components/home/Header';
 
 const Home = ({navigation}) => {
-  useEffect(() => {
-    getTask();
-  }, []);
   const [tasks, setTasks] = useState([]);
   const [refreshing, setRefreshing] = useState(false);
   const getTask = async () => {
@@ -28,11 +33,15 @@ const Home = ({navigation}) => {
     getTask(); //get Task fonk calistir tasks statesini güncelle
     setRefreshing(false); //tekrar refreshing statesini false cekerek refreshing i bitir
   };
+  useEffect(() => {
+    getTask();
+  }, []);
 
   return (
-    <SafeAreaView style={styles.container}>
+    <View style={styles.container}>
       <FlatList
         data={tasks}
+        ListHeaderComponent={<Header />}
         renderItem={({item}) => {
           return <TaskCard item={item} />;
         }}
@@ -42,7 +51,7 @@ const Home = ({navigation}) => {
       />
 
       <FloatAction onPress={() => navigation.navigate(screens.ADDTASKS)} />
-    </SafeAreaView>
+    </View>
   );
 };
 
@@ -52,5 +61,18 @@ const styles = StyleSheet.create({
   container: {
     backgroundColor: themeColors.background,
     flex: 1,
+  },
+  header: {
+    fontSize: 20,
+    fontWeight: 'bold',
+    textAlign: 'center',
+    marginVertical: 10,
+    color: 'white',
+  },
+  empty: {
+    fontSize: 16,
+    textAlign: 'center',
+    color: 'gray',
+    marginVertical: 20,
   },
 });
