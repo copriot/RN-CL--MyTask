@@ -19,11 +19,9 @@ const Home = ({navigation}) => {
   const [tasks, setTasks] = useState([]);
   const [refreshing, setRefreshing] = useState(false);
   const getTask = async () => {
-    let myTask = [];
     try {
-      const task = await AsyncStorage.getItem('task');
-      myTask.push(JSON.parse(task));
-      setTasks(myTask);
+      const savedTask = await AsyncStorage.getItem('tasks');
+      setTasks(JSON.parse(savedTask));
     } catch (error) {
       console.log(error);
     }
