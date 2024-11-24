@@ -1,5 +1,12 @@
 /* eslint-disable react-native/no-inline-styles */
-import {FlatList, Pressable, StyleSheet, Text, View} from 'react-native';
+import {
+  FlatList,
+  Pressable,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from 'react-native';
 import React from 'react';
 import themeColors from '../../theme';
 import {
@@ -10,38 +17,42 @@ import {
   Xrp,
 } from 'iconsax-react-native';
 
-const Header = () => {
+const Header = ({ongoing, pending, complated, cancel}) => {
   const tasks = [
     {
       id: 1,
       title: 'Ongoing',
       color: themeColors.ONGOING,
       icon: <Driving size="32" color={themeColors.textColor} />,
+      count: ongoing,
     },
     {
       id: 2,
       title: 'Pending',
       color: themeColors.PENDING,
       icon: <DocumentUpload size="32" color={themeColors.textColor} />,
+      count: pending,
     },
     {
       id: 3,
       title: 'Complated',
       color: themeColors.COMPLATED,
       icon: <NoteText size="32" color={themeColors.textColor} />,
+      count: complated,
     },
     {
       id: 4,
       title: 'Cancel',
       color: themeColors.CANCEL,
       icon: <Xrp size="32" color={themeColors.textColor} />,
+      count: cancel,
     },
   ];
 
   // eslint-disable-next-line react/no-unstable-nested-components
   const Task = ({item}) => {
     return (
-      <Pressable
+      <TouchableOpacity
         // eslint-disable-next-line react-native/no-inline-styles
         style={{
           width: '45%',
@@ -68,19 +79,21 @@ const Header = () => {
               }}>
               {item.title}
             </Text>
-            <Text style={{color: themeColors.textColor}}>{10} Task</Text>
+            <Text style={{color: themeColors.textColor}}>
+              {item.count} Task
+            </Text>
           </View>
 
           <View>
             <ArrowCircleRight size="22" color={themeColors.textColor} />
           </View>
         </View>
-      </Pressable>
+      </TouchableOpacity>
     );
   };
 
   return (
-    <View style={styles.container}>
+    <Pressable style={styles.container}>
       <FlatList
         numColumns={2}
         data={tasks}
@@ -98,7 +111,7 @@ const Header = () => {
           All TASKS
         </Text>
       </View>
-    </View>
+    </Pressable>
   );
 };
 
