@@ -14,6 +14,7 @@ import {
   TouchableOpacity,
 } from 'react-native';
 import themeColors from '../theme';
+import {Moon, Sun1} from 'iconsax-react-native';
 
 const Stack = createNativeStackNavigator();
 
@@ -45,18 +46,13 @@ const Navigator = () => {
                 style={{
                   marginRight: 10,
                   padding: 10,
-                  borderRadius: 5,
-                  backgroundColor: darkMode
-                    ? themeColors.textColor
-                    : themeColors.background,
                 }}>
-                <Text
-                  style={{
-                    color: darkMode
-                      ? themeColors.background
-                      : themeColors.textColor,
-                  }}>
-                  {darkMode ? 'Light Mode' : 'Dark Mode'}
+                <Text>
+                  {darkMode ? (
+                    <Sun1 size="32" color="#dce775" variant="Bold" />
+                  ) : (
+                    <Moon size="32" color="#555555" variant="Bold" />
+                  )}
                 </Text>
               </TouchableOpacity>
             ),
