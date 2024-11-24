@@ -7,4 +7,5 @@
 - npm install yup --save
 - npm i @ui-kitten/components @eva-design/eva react-native-svg
 - npm i iconsax-react-native react-native-svg
-  .
+
+  ![](Gif.gif)
