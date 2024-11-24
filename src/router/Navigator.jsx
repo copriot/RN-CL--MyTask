@@ -31,12 +31,12 @@ const Navigator = () => {
             headerStyle: {
               backgroundColor: darkMode
                 ? themeColors.background
-                : themeColors.textColor,
+                : themeColors.lightGray,
             },
             contentStyle: {
               backgroundColor: darkMode
                 ? themeColors.background
-                : themeColors.textColor,
+                : themeColors.lightGray,
             },
             // eslint-disable-next-line react/no-unstable-nested-components
             headerRight: () => (
@@ -51,7 +51,11 @@ const Navigator = () => {
                   {darkMode ? (
                     <Sun1 size="32" color="#dce775" variant="Bold" />
                   ) : (
-                    <Moon size="32" color="#555555" variant="Bold" />
+                    <Moon
+                      size="32"
+                      color={themeColors.background}
+                      variant="Bold"
+                    />
                   )}
                 </Text>
               </TouchableOpacity>
